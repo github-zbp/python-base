@@ -1,0 +1,149 @@
+文件系统：
+
+打开文件 open()
+返回文件对象
+
+两参，一个是文件路径，一个是打开模式
+r 只读，默认是这个模式
+w 写入，打开时会覆盖所有内容
+x 写入模式，但文件已存在会报错
+a 写入，追加写入
+b 以二进制模式打开
+t 以文本模式打开，默认是这个模式
++ 可读可写模式
+
+默认打开模式是rt
+
+反正是和php是一样的
+
+f=open("1.txt")
+
+文件操作：
+f.close()
+f.read(size)	size按字符计算，不传参则获取所有内容
+f.seek(offset[,from]) 调节指针,from为0,1,2，是文件开头、当前位置和结尾位置，第一参是偏移量
+f.tell()	返回文件指针位置
+f.readline()	一行一行的读取，可以配合循环
+
+使用list(f)可将文件转为列表，每行作为列表的每个元素
+直接遍历文件对象，也可以实现按行输出文件
+for line in f :
+	print(f)
+	
+f.write() 写入，返回写入的字符数
+f.writelines()	可以传入一个序列,但是序列里的元素必须是字符串。不是按行写入哦！
+
+
+模块：模块就是一个py文件，里面有很多函数，变量
+
+引入一个模块
+import 文件名
+比如
+import random
+
+像文件操作，可以引入os模块。因为不同的操作系统，文件的操作是不同的
+所以为了兼容这种差异性，要引入os模块
+
+import os
+
+然后这个模块他有以下方法，如果不引入这个模块就用不了这些方法
+
+os.getcwd()	返回当前工作目录
+os.chdir(path)	改变工作路径，相当于Linux的cd
+os.listdir(path)	列出该目录所有的文件，返回列表
+os.mkdir(path)	创建单层目录
+os.mkdirs(path)	递归创建目录
+os.remove(path)	干掉一个文件
+os.rmdir(path)	干掉单层目录
+os.removedirs(path)	递归干掉目录，但是目录要非空
+rename(old,new)	重命名
+system(command)	运行系统的shell命令
+
+os.path的方法,请自动在下面的方法前添加os.path.
+basename(path)	只返回文件名
+dirname(path)
+join(p1,p2,p3)  将多个路径连接起来，p1/p2/p3 如果又盘符名称，请自行加上/
+如：
+join("C:/","programData","1.txt")
+split(path)     和join相反
+splitext(path)  分离扩展名，返回list
+getsize(path)	单位是字节
+getatime()/getctime()/getmtime()
+exists(path)	判断路径是否存在
+isdir()
+isfile()
+islink()
+ismount()	判断是否是挂载点
+samefile(path1,path2)	判断两个路径是否指向同一个文件
+
+如何将列表、集合、字典、元祖存到文件。
+可以使用pickle模块(pickle,泡菜之意)
+他可以将上面这些类型转化为二进制数据并存入文件中
+
+import pickle
+
+list1=[1,"zbp",{"sex":"m","age":21}]
+f=open("my_list.pkl","wb")	//文件后缀无所谓，但规范的是pkl,而且一定要以b模式打开
+
+pickle.dump(list1,f)	//写入
+
+f.close()
+
+读取：
+f=open("my_list.pkl","rb")	//以b的形式打开
+list1=pickle.load(f)
+f.close()
+
+写一个描述符，使用文件来存属性，一个属性存到一个泡菜中，如果属性被删除，则文件
+也会被删除
+答案：
+import pickle
+import os
+
+class MyDes:
+    def __init__(self,name):
+        self.name=name
+        self.value=None
+
+    def __get__(self,instance,owner):
+        return self.value
+
+    def __set__(self,instance,value):
+        self.value=value
+        self.record()
+
+    def record(self):
+        self.f=open(self.name+".pkl","wb")
+        pickle.dump(self.value,self.f)
+        self.f.close()
+
+    def __delete__(self,instance):
+        os.remove(self.name+".pkl")
+        del self.value
+		
+		
+>>> test=Test()
+>>> test.x=123
+>>> test.y="hello"
+>>> test.x
+123
+>>> test.y
+'hello'
+>>> f=open("x.pkl","rb")
+>>> pickle.load(f)
+123
+>>> del test
+
+
+使用with语法打开文件，好处是会自动帮你关闭句柄：
+
+例如打开一个文件并进行读写登操作
+f=open("my_list.pkl","rb")	
+list1=pickle.load(f)
+f.close()
+
+上面也可以写成：
+with open("my_list.pkl","rb") as f:   #这个冒号不能少
+    list1=pickle.load(f)              #这里要tab一下
+
+这样就不用关闭句柄，他会自动帮你关

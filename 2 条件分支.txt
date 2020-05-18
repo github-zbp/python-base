@@ -1,0 +1,142 @@
+变量
+name="zbp"
+
+还有赋值变量的时候还可以这样
+x,y=4,5
+
+输出变量
+print(name) //相当于php中的echo
+
+字符串拼接 + 
+5+8  可以
+"5"+"8"  可以 是58
+5+"8"   报错
+
+定义一个原始字符串：
+str=r"C:\program"
+他就会自动转义里面的\
+
+定义一个长字符串
+str="""内容"""    //相当于php中的<<<EOF  EOF
+
+pthyon的标准数据类型
+Number（数字）
+String（字符串）
+List（列表）
+Tuple（元组）
+Set（集合）
+Dictionary（字典）
+
+其实在pthyon中，所有的数据都是对象，所以不用太纠结类型这种东西
+
+不可变数据（3 个）：Number（数字）、String（字符串）、Tuple（元组）；
+可变数据（3 个）：List（列表）、Dictionary（字典）、Set（集合）。
+
+其中数字类型包括：
+int、float、bool、complex（复数）
+布尔型在Pthyon中本质上属于数字类型，pthyon的对是True不是true
+True是1，False是0
+True+True  -->2
+
+可以用int()/float()/str()对各个类型进行转换
+当然，int("2")可以，int("你好")会报错
+int(5.99)会往下取，得5
+float(5),得5.0
+
+不要使用内置函数名作为变量名，否则调用这个函数会报错
+
+
+
+获取变量的类型
+type(变量名)
+isinstance(变量名,类型)  //第二参不是一个字符串，而是一个对象
+isinstance(name,str)
+
+pthyon的运算符，只要注意一个10//8是将10除以8，再往下取整
+**相当于幂运算，3**2==9
+还有pthyon是没有|| && !，只有and or和not
+bool=1 and 2
+bool的结果不是True，而是2，相当于php中的三元运算符
+1<2<3这种语法在其他语言是不允许的，但在pthyon中是可以的，结果为True
+比如说php要写为:if($n1>$n2 && $n2>$n3){...}
+在pthyon可以写成:if n1>n2>n3 ...
+但是数字不可以和字符串比较。
+
+分支和循环
+if 条件:
+    代码块
+elif 条件:
+    代码块
+else:
+    代码块
+	
+如果你想写出
+if(){
+    if(){
+	    
+	}
+}
+
+就要写成
+if ...:
+    if ...:
+不要写成
+if ...:
+if ...:
+
+三元操作符
+x=4
+y=5
+
+small=x if x<y else y
+print(small)
+
+
+断言 assert
+assert 表达式
+如果assert后的东西是False，则会终止程序再报错
+可以用来干嘛，断点检测bug
+
+循环
+
+while 条件:
+    循环体
+
+for 目标 in 表达式:   //表达式一般是一个列表
+    循环体
+	
+比如 
+string="abcd"
+for i in string:
+    print(i,end=" ")
+	
+得到a b c d
+
+简单地说，目标相当于value,表达式相当于一个数组
+
+又比如
+arr=["a","b","c","d"]    //pthyon没有数组类型，这里叫做列表
+for value in arr:
+    print(value,end="\n")
+
+len(arr)  //可以计算列表元素个数，也可以计算一个字符串的长度，不可以传int型，会报错
+
+range()   //相当于php的range(),但不包括最后一个值
+
+range(10)   0~9
+range(1,10) 1~9
+range生成的不是列表类型，而是range类型
+
+arr=range(1,10)
+type(arr)  //得range
+arr=list(arr) //转为list类型
+isinstance(arr,isinstance)  //True
+
+看上去py的for循环只能遍历数组，列表之类的迭代器，而无法像php那样做特定次数的遍历，如
+for($i=0;$i<100;$i++){
+    echo $i;
+}
+
+但其实也是可以做到的：
+for i in range(100):
+    print(i)

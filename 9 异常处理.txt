@@ -1,0 +1,27 @@
+异常处理：
+
+pthyon的异常类型，不用记，了解即可
+
+try：
+    代码
+except Exception[as reason]
+    处理异常
+
+其实异常的处理我一般是这样使用的：
+try:
+    代码
+except BaseException as e:
+    print(e)
+    
+BaseException会捕获所有的异常，并将异常传给e变量，然后输出
+	
+丰富的else语句
+在pthyon中，else语句不仅和if用，还可以有其他功能
+while 条件 :
+    xxx
+else :
+    xxx 
+他是这样的，当循环全部结束就会执行else中的内容
+
+
+

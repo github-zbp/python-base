@@ -1,0 +1,96 @@
+字符串内置方法：
+
+字符串截取：（使用切片即可）
+str1=str1[:6]	//截取0~5个字符
+
+访问单个字符
+str1[0]
+
+首字母大写
+str1.capitalize()
+
+变小写
+str1.casefold()
+
+计算某字符出现的次数
+str1.count(sub[,start,end])
+
+查找子串,返回下标，不存在返回-1
+str1.find(sub[,start,end])
+str1.rfind(sub)	//从右边开始找
+
+如果是字母或者数字或者字母数字混合返回True0
+str1.isalnum()
+
+isalpha()	//要只有字母
+isdigit()	//要只有数字
+islower()	//是否全为小写
+isupper()
+
+以str1为分割符，将参数中的字符串按每个字符分割，返回一个字符串
+str1.join("12345")
+
+如：
+str1="a"
+str2=str1.join("12345")
+print(str2)
+得到1a2a3a4a5
+
+join中一般是传列表这样的序列,将序列转为字符串：
+print(",".join(["1","2","3","4"]))  # "1,2,3,4"
+print(",".join([1,2,3,4]))  # 报错，因为列表中是数字，数字不能和字符串拼接
+
+explode将字符串转为列表
+print("1,2,3,4".split(","))     #['1', '2', '3', '4']
+
+join相当于php中的implode；split相当于php中的explode
+
+str1.lower()
+str1.upper()
+
+去掉字符串的左边空格和特定字符
+str1.lstrip(chars)
+
+str1.rstrip(chars)
+
+str1.strip(chars)	//去掉左右两边空格
+
+会将str1分割为只有3个元素的列表
+str1.partition(sub)
+
+如：
+str1="abcdefg"
+list1=str1.partition("de")
+list1为["abc","de","fg"]
+
+字符串替换
+str1.replace(old,new)
+
+按照特定字符切割为列表，相当于php的explode()
+str1.split(sub)
+
+判断该字符串是否由某字符开头
+str1.startswith(prefix)
+
+用0左填充到指定长度
+str1.zfill(width)
+
+字符串格式化
+如：
+"{0} love {1}.{2}".format("i","fishc","com")
+
+得到i love fishc.com 
+相当于php中的sprintf
+
+如：
+"{a} love {b}.{c}".format(a="i",b="fishc",c="com")
+
+或者
+"{0} love {b}.{c}".format("i",b="fishc",c="com")
+
+又如：
+"{0:.1f}".format(27.658)
+得到27.7，冒号后面指定类型是浮点型
+
+又如：
+"i %s you.Do you love %s" % ("love","me")

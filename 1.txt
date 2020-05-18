@@ -1,0 +1,44 @@
+pthyon初始接触
+
+Python是一门具有强类型(即变量类型是强制要求的)、动态性、隐式类型(不需要做变量声明)、大小写敏感(var和VAR代表了不同的变量)以及面向对象(一切皆为对象)等特点的编程语言。
+
+下载了pthyon后，打开里面的IDEL程序。
+在anaconda中，它位于scripts/idle.exe
+
+他会打开一个命令框之类的东西
+可以在里面输入pthyon命令，如
+print("hello")不用分号
+
+尝试
+print(5+3)
+5+3
+print("hello "+"world")  //使用+来连接字符串的
+print("i love hello\n"*8)  //打印8次
+print("i love hello\n"+8)  //报错
+
+然后可以在IDEL中ctrl+n可以新建一个pthyon的文本文件(编辑器)。
+然后使用tab他有自动补全的功能
+
+在文本文件中输入一段代码：
+print("开始游戏")
+num=input("输入一个数")
+
+number=int(num)
+
+if number==8:
+	print("对了")
+else:
+	print("错了")
+print("游戏结束")
+
+然后在编辑器F5即可运行
+
+说一下pthyon的语法，
+1.不用分号结束
+2.代码块不用{}显示，而是使用tab缩进，有缩进的语句就是在代码块中的语句
+3.if else后面会有:号
+4.input()是一个bif，即内置函数。用户输入的东西返回的是一个字符串，所以后面要用int转为整形因为在pthyon中8！="8",在php中8==“8”
+5.变量定义不用声明类型
+
+dir(__builtins__)  //返回所有的BIF
+

@@ -1,0 +1,98 @@
+py小技巧：
+
+如何使用int()四舍五入：
+int(5.4+0.5)->5
+int(5.6+0.5)->6
+
+round()得到四舍五入后的浮点型
+
+4==4.0 是True
+
+使用random库的random.uniform(a,b)可以得到浮点型的随机数
+
+Python3 可以给变量命名中文名
+
+py中为假的7种情况：False None 0 "" '' () [] {}
+
+一行过长的语句可以使用反斜杠或者括号分解成几行
+print(\
+	"aaaaa"\
+	)
+	
+(print
+     ("aaa")
+     )
+	 
+not or and 的优先级是不同的：not > and > or
+
+
+爱因斯坦曾出过这样一道有趣的数学题：有一个长阶梯，若每步上2阶，最后剩1阶；若每步上3阶，最后剩2阶；若每步上5阶，最后剩4阶；若每步上6阶，最后剩5阶；只有每步上7阶，最后刚好一阶也不剩。
+（小甲鱼温馨提示：步子太大真的容易扯着蛋~~~）
+
+题目：请编程求解该阶梯至少有多少阶？
+x = 7
+i = 1
+flag = 0
+
+while i <= 100:
+    if (x%2 == 1) and (x%3 == 2) and (x%5 == 4) and (x%6==5):
+        flag = 1
+    else:
+        x = 7 * (i+1) # 根据题意，x一定是7的整数倍，所以每次乘以7
+    i += 1
+
+if flag == 1:
+    print('阶梯数是：', x)
+else:
+    print('在程序限定的范围内找不到答案！')
+
+
+for i in 5 :
+     print(i)
+是错的，因为整形不是一个迭代器，不能遍历
+
+append() 方法和 extend() 方法都是向列表的末尾增加元素，请问他们有什么区别？
+比如：
+list1=[1,2,3]
+list1.append(4) --> [1,2,3,4]
+list1.extend(5)	--> 报错
+list1.extend([5])-->[1,2,3,4,5]
+
+append相当于往后面插入元素，extend相当于合并两个列表
+
+member.append(['竹林小溪', 'Crazy迷恋']) 和 member.extend(['竹林小溪', 'Crazy迷恋']) 实现的效果一样吗？
+比如
+list1=[1,2,3]
+#list1.append([4,5]) --> [1,2,3,[4,5]]
+#list1.extend([4,5])--> [1,2,3,4,5]
+
+有列表 name = ['F', 'i', 'h', 'C']，如果小甲鱼想要在元素 'i' 和 'h' 之间插入元素 's'，应该使用什么方法来插入？
+name=name[:2]+["s"]+name[2:]
+或者
+name.insert(2,"s")
+
+向列表增加元素有哪些方法？
+append()、extend() 和 insert()
+
+如何倒序排序列表
+先用sort()后用reverse()
+list1.sort().reverse()-->报错，不能连缀操作
+
+list1.sort()
+list1.reverse()
+
+x, y, z = 1, 2, 3 请问x, y, z是元组吗
+不是，x,y,z分别是1，2，3
+
+
+有字符串：str1 = '<a href="http://www.fishc.com/dvd" target="_blank">鱼C资源打包</a>'，请问如何提取出子字符串：'www.fishc.com'
+str1 = '<a href="http://www.fishc.com/dvd" target="_blank">鱼C资源打包</a>'
+list1=str1.split("/")
+list1[2]
+
+请问这个函数有多少个参数？
+def MyFun((x, y), (a, b)):
+    return x * y - a * b
+
+这样的写法是错误的！
+我们分析下，函数的参数需要的是变量，而这里你试图用“元祖”的形式来传递是不可行的。

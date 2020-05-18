@@ -1,0 +1,129 @@
+字典：（相当于php中的关联数组）
+
+PS:字典不是序列类型，而是映射类型
+
+创建字典：
+1.直接定义
+dict1={"a":1,"b":2,"c":3}
+类似于json
+
+2.使用dict()函数
+dict1=dict((("a",1),("b",2),("c",3)))  //传一个二位元组
+
+dict1=dict(("a",1),("b",2),("c",3))  //不行，因为dict只有一个参数
+
+dict1=dict(a=1,b=2,c=3)  //也可以，但是要注意，这样定义时键不要加引号
+
+
+访问：
+dict1["a"]
+
+添加元素或者修改元素：
+dict1["a"]=100
+dict1["e"]=5    //添加
+
+当然它和json不同的是，字典的键也可以是数字
+
+字典的方法：
+dict1.fromkeys()  //创建一个新的字典
+
+如：
+dict1.fromkeys((1,2,3))
+得到：{1:None,2:None,3:None}
+
+dict1.fromkeys((1,2,3),"a")
+得到：{1:"a",2:"a",3:"a"}
+
+dict1.fromkeys((1,2,3),("a","b","c"))
+得到：{1:("a","b","c"),2:("a","b","c"),3:("a","b","c")}
+
+dict1.fromkeys(range(10),"hello")
+得到...
+
+字典的遍历：
+dict1={"a":1,"b":2,"c":3}
+
+for val in dict1:
+	  print(val)
+或者
+for val in dict1.keys():
+	  print(val)	
+会遍历出所有键：a,b,c
+
+for val in dict1.values():
+	  print(val)
+	  
+会遍历出所有值：1,2,3
+
+for val in dict1.items():
+	  print(val)
+会遍历出所有项，每个项以元祖的形式呈现：
+('a', 100)
+('b', 2)
+('c', 3)
+('e', 5)
+
+可以这样
+for val in dict1.items():
+	  print(val[0],val[1])
+	  
+或者
+for key,val in dict1.items():
+    print(key,val)
+    
+a 100
+b 2
+c 3
+e 5
+
+如果访问字典中不存在的元素：
+dict1["z"]
+会报错
+
+如果不想他报错，可以这样：
+dict1.get("z")
+没有就会返回None
+
+还可以设置默认值
+dict1.get("z",26)
+
+判断某下标的元素是否存在
+"z" in dict1
+
+将字典清空：
+dict1.clear()
+dict1={}    //不推荐，二者有区别，前者可以将该字典的所有引用干掉。
+
+浅拷贝
+dict2=dict1.copy()
+他和
+dict2=dict1的区别是，后者是同一个引用
+
+随机弹出一个元素
+dict1.popitem()
+弹出的是一个元祖
+字典的元素是没有顺序的。
+
+update()  用一个字典更新另一个字典的元素
+dict1={"a":1,"b":2,"c":3}
+dict2={"c":30}
+dict1.update(dict2)
+print(dict1)
+
+得到：{'a': 1, 'b': 2, 'c': 30}
+
+字典推导式（有下标）：{下标：值(这个值是个表达式) for i,v in dict.items()}
+例如：
+{i:i%2==0 for i in range(10)}
+得到：
+{0: True, 1: False, 2: True, 3: False, 4: True, 5: False, 6: True, 7: False, 8: True, 9: False}
+
+将字典的下标和值对调：
+list1={'a': 1, 'b': 2, 'c': 30}
+list1={v:k for k,v in list1.items()}
+
+解释一下，list1.items()返回的是一个类似与列表里面装着元组类型的元素的东西，也是一个迭代器
+返回：dict_items([('a', 1), ('b', 2), ('c', 30)])
+k和v就分别代表a,b,c和1，2，3
+
+

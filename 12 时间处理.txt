@@ -1,0 +1,54 @@
+首先导入time模块
+
+import time
+
+
+
+time.time()  返回当前时间戳，保留到小数4位
+
+time.localtime()  当前时间，格式是元组
+
+#返回值如下：
+
+# time.struct_time(tm_year=2018, tm_mon=8, tm_mday=28, tm_hour=14, tm_min=46, tm_sec=1, tm_wday=1, tm_yday=240, tm_isdst=0)
+
+
+
+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+
+根据元组格式化日期2016-03-20 11:45:39
+
+
+
+获取日期的时间戳
+
+time.mktime(元组)
+
+# 传入的元组有九个元素(y,m,d,h,i,s,0,0,0) 
+
+# 返回的是包含一个小数点的时间戳,个位有10位
+
+比如：
+
+time.mktime((2018,10,21,0,0,0,0,0,0))
+
+或者
+
+time.mktime(time.localtime())  #因为time.localtime()返回值也是元组
+
+
+
+根据字符串格式的时间获取到元组格式
+
+time.strptime(str,format)
+
+
+例如：
+str="2018-10-21 10:20:55"
+
+time_tuple = time.strptime(str,"%Y-%m-%d %H:%M:%S")
+
+#time_tuple 为 time.struct_time(tm_year=2018, tm_mon=10, tm_mday=21, tm_hour=10, tm_min=20, tm_sec=55, tm_wday=6, tm_yday=294, tm_isdst=-1)
+
+timeStamp = time.mktime(time_tuple)
+print(timeStamp)     #1540088455.0
